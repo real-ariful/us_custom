@@ -25,6 +25,7 @@ class SaleOrder(models.Model):
         default=lambda self: fields.Datetime.now() + timedelta(hours=1),
         store=True,
     )
+    order_note = fields.Char()
 
 
     
