@@ -1,0 +1,21 @@
+<odoo>
+    <template id="report_custom_picking_operations" inherit_id="stock.report_picking">
+        <xpath expr="//div[@name='div_origin']" position="after">
+            <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
+                <strong t-if="o.sale_id.order_type in ['draft', 'sent']">Order Type:</strong>
+                <strong t-else="">Order Type:</strong>
+                <p class="m-0" t-field="o.order_type"/>
+            </div>
+            <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
+                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event Start:</strong>
+                <strong t-else="">Event Start:</strong>
+                <p class="m-0" t-field="o.event_start"/>
+            </div>
+            <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
+                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event End:</strong>
+                <strong t-else="">Event End:</strong>
+                <p class="m-0" t-field="o.event_end"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

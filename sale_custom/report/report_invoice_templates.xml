@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherited" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='origin']" position="after">
+            <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
+                <strong>Order Type:</strong>
+                <p class="m-0" t-field="o.order_type"/>
+            </div>
+            <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
+                <strong>Event Start:</strong>
+                <p class="m-0" t-field="o.event_start"/>
+            </div>
+            <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
+                <strong>Event End:</strong>
+                <p class="m-0" t-field="o.event_end"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
