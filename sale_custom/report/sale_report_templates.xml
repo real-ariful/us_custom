@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="report_saleorder_document_inherit_sale_management" inherit_id="sale.report_saleorder_document">
-    
-    <xpath expr="//div[@name='informations_date']" position="after">
-
-        <div t-if="doc.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
-            <strong t-if="doc.order_type in ['draft', 'sent']">Order Type:</strong>
-            <strong t-else="">Order Type:</strong>
-            <p class="m-0" t-field="doc.order_type"/>
+<template id="report_saleorder_document_inherit_sale_custom" inherit_id="sale.report_saleorder_document">
+    <xpath expr="//div[@id='informations']" position="before">
+        <div class="row mt-4 mb-4" id="informations_custom">
+            <div t-if="doc.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
+                <strong>Order Type:</strong>
+                <p class="m-0" t-field="doc.order_type"/>
+            </div>
+            <div t-if="doc.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
+                <strong>Event Start:</strong>
+                <p class="m-0" t-field="doc.event_start"/>
+            </div>
+            <div t-if="doc.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
+                <strong>Event End:</strong>
+                <p class="m-0" t-field="doc.event_end"/>
+            </div>
+            <div t-if="doc.commitment_date" class="col-auto col-3 mw-100 mb-2" name="commitment_date">
+                <strong>Delivery Date:</strong>
+                <p class="m-0" t-field="doc.commitment_date"/>
+            </div>
         </div>
-        <div t-if="doc.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
-            <strong t-if="doc.state in ['draft', 'sent']">Event Start:</strong>
-            <strong t-else="">Event Start:</strong>
-            <p class="m-0" t-field="doc.event_start"/>
-        </div>
-        <div t-if="doc.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
-            <strong t-if="doc.state in ['draft', 'sent']">Event End:</strong>
-            <strong t-else="">Event End:</strong>
-            <p class="m-0" t-field="doc.event_end"/>
+        <div class="row mt-4 mb-4" id="order_note_custom">
+            <div t-if="doc.order_note" class="col-auto col-12 mw-100 mb-2" name="order_note">
+                <strong>Order Note:</strong>
+                <p class="m-0" t-field="doc.order_note"/>
+            </div>
         </div>
     </xpath>
 </template>

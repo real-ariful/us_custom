@@ -29,6 +29,9 @@
                     <field name="event_start"/>
                     <field name="event_end"/>
                 </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="order_note"/>
+                </xpath>
             </field>
         </record>
     </data>

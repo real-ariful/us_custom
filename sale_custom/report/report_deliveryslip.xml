@@ -1,20 +1,53 @@
 <odoo>
-    <template id="report_delivery_document2" inherit_id="stock.report_delivery_document">
-        <xpath expr="//div[@name='div_origin']" position="after">
-            <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
-                <strong t-if="o.sale_id.order_type in ['draft', 'sent']">Order Type:</strong>
-                <strong t-else="">Order Type:</strong>
-                <p class="m-0" t-field="o.order_type"/>
+    <template id="delivery.report_delivery_document2" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <!-- <div t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id" class="col-auto">
+                <strong>Carrier:</strong>
+                <p t-field="o.carrier_id"/>
+            </div> -->
+            <div t-if="o.shipping_weight" class="col-auto">
+                <strong>Total Weight:</strong>
+                <br/>
+                <span t-field="o.shipping_weight"/>
+                <span t-field="o.weight_uom_name"/>
             </div>
-            <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
-                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event Start:</strong>
-                <strong t-else="">Event Start:</strong>
-                <p class="m-0" t-field="o.event_start"/>
+            <div t-if="o.carrier_tracking_ref" class="col-auto">
+                <strong>Tracking Number:</strong>
+                <p t-field="o.carrier_tracking_ref"/>
             </div>
-            <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
-                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event End:</strong>
-                <strong t-else="">Event End:</strong>
-                <p class="m-0" t-field="o.event_end"/>
+            <t t-set="has_hs_code" t-value="o.move_ids.filtered(lambda l: l.product_id.hs_code)"/>
+        </xpath>
+
+        <xpath expr="//table[@name='stock_move_line_table']/thead/tr" position="inside">
+            <th t-if="has_hs_code"><strong>HS Code</strong></th>
+        </xpath>
+    </template>
+
+    <template id="report_delivery_document_inherit_sale_custom" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]//div[hasclass('row')]" position="before">
+            <div class="row mt32 mb32">
+                <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
+                    <strong>Order Type:</strong>
+                    <p class="m-0" t-field="o.order_type"/>
+                </div>
+                <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
+                    <strong>Event Start:</strong>
+                    <p class="m-0" t-field="o.event_start"/>
+                </div>
+                <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
+                    <strong>Event End:</strong>
+                    <p class="m-0" t-field="o.event_end"/>
+                </div>
+                <div t-if="o.sale_id.commitment_date" class="col-auto col-3 mw-100 mb-2" name="commitment_date">
+                    <strong>Delivery Date:</strong>
+                    <p class="m-0" t-field="o.sale_id.commitment_date"/>
+                </div>
+            </div>
+            <div class="row mt32 mb32">
+                <div t-if="o.order_note" class="col-auto col-12 mw-100 mb-2" name="order_note">
+                    <strong>Order Note:</strong>
+                    <p class="m-0" t-field="o.order_note"/>
+                </div>
             </div>
         </xpath>
     </template>

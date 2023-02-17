@@ -1,20 +1,46 @@
 <odoo>
+    <template id="delivery.report_shipping2" inherit_id="stock.report_picking">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <!-- <div t-if="o.picking_type_id.code == 'outgoing' and o.carrier_id" class="col-auto">
+                <strong>Carrier:</strong>
+                <p t-field="o.carrier_id"/>
+            </div> -->
+            <div t-if="o.weight" class="col-auto">
+                <strong>Weight:</strong>
+                <br/>
+                <span t-field="o.weight"/>
+                <span t-field="o.weight_uom_name"/>
+            </div>
+        </xpath>
+    </template>
+
     <template id="report_custom_picking_operations" inherit_id="stock.report_picking">
-        <xpath expr="//div[@name='div_origin']" position="after">
-            <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
-                <strong t-if="o.sale_id.order_type in ['draft', 'sent']">Order Type:</strong>
-                <strong t-else="">Order Type:</strong>
-                <p class="m-0" t-field="o.order_type"/>
+        <xpath expr="//div[@name='div_state']" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('page')]//div[hasclass('row')][3]" position="before">
+            <div class="row mt48 mb32">
+                <div t-if="o.order_type" class="col-auto col-3 mw-100 mb-2" name="order_type">
+                    <strong>Order Type:</strong>
+                    <p class="m-0" t-field="o.order_type"/>
+                </div>
+                <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
+                    <strong>Event Start:</strong>
+                    <p class="m-0" t-field="o.event_start"/>
+                </div>
+                <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
+                    <strong>Event End:</strong>
+                    <p class="m-0" t-field="o.event_end"/>
+                </div>
+                <div t-if="o.sale_id.commitment_date" class="col-auto col-3 mw-100 mb-2" name="commitment_date">
+                    <strong>Delivery Date:</strong>
+                    <p class="m-0" t-field="o.sale_id.commitment_date"/>
+                </div>
             </div>
-            <div t-if="o.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
-                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event Start:</strong>
-                <strong t-else="">Event Start:</strong>
-                <p class="m-0" t-field="o.event_start"/>
-            </div>
-            <div t-if="o.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
-                <strong t-if="o.sale_id.state in ['draft', 'sent']">Event End:</strong>
-                <strong t-else="">Event End:</strong>
-                <p class="m-0" t-field="o.event_end"/>
+            <div class="row mt48 mb32">
+                <div t-if="o.order_note" class="col-auto col-12 mw-100 mb-2" name="order_note">
+                    <strong>Order Note:</strong>
+                    <p class="m-0" t-field="o.order_note"/>
+                </div>
             </div>
         </xpath>
     </template>

@@ -15,6 +15,7 @@ class AccountMove(models.Model):
     event_start = fields.Datetime(compute='_compute_custom_fields')
     event_end = fields.Datetime(compute='_compute_custom_fields')
     order_note = fields.Char(compute='_compute_custom_fields')
+    commitment_date = fields.Char(compute='_compute_custom_fields')
 
     def _compute_custom_fields(self):
         for rec in self:
@@ -22,6 +23,7 @@ class AccountMove(models.Model):
             rec.event_start = False
             rec.event_end = False
             rec.order_note = False
+            rec.commitment_date = False
             if rec.line_ids:
                 sale_id = rec.line_ids.sale_line_ids.order_id
 
@@ -30,3 +32,4 @@ class AccountMove(models.Model):
                     rec.event_start = sale_id.event_start
                     rec.event_end = sale_id.event_end
                     rec.order_note = sale_id.order_note
+                    rec.commitment_date = sale_id.commitment_date

@@ -7,7 +7,7 @@
     'website': "https://www.haquesystems.com",
     'category': 'Hidden/Tools',
     'version': '0.1',
-    'depends': ['sale', 'account', 'stock'],
+    'depends': ['sale', 'account', 'stock', 'delivery'],
     'data': [
         'views/sale_order_views.xml',
         'views/account_move_views.xml',
