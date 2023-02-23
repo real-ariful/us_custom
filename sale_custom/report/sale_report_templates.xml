@@ -9,15 +9,15 @@
             </div>
             <div t-if="doc.event_start" class="col-auto col-3 mw-100 mb-2" name="event_start">
                 <strong>Event Start:</strong>
-                <p class="m-0" t-field="doc.event_start"/>
+                <p class="m-0" t-esc="doc.convert_utc_to_local(doc.event_start)"/>
             </div>
             <div t-if="doc.event_end" class="col-auto col-3 mw-100 mb-2" name="event_end">
                 <strong>Event End:</strong>
-                <p class="m-0" t-field="doc.event_end"/>
+                <p class="m-0" t-esc="doc.convert_utc_to_local(doc.event_end)"/>
             </div>
             <div t-if="doc.commitment_date" class="col-auto col-3 mw-100 mb-2" name="commitment_date">
                 <strong>Delivery Date:</strong>
-                <p class="m-0" t-field="doc.commitment_date"/>
+                <p class="m-0" t-esc="doc.convert_utc_to_local(doc.commitment_date)"/>
             </div>
         </div>
         <div class="row mt-4 mb-4" id="order_note_custom">
