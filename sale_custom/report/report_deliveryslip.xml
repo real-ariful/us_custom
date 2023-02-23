@@ -40,7 +40,7 @@
                 </div>
                 <div t-if="o.sale_id.commitment_date" class="col-auto col-3 mw-100 mb-2" name="commitment_date">
                     <strong>Delivery Date:</strong>
-                    <p class="m-0" t-esc="o.convert_utc_to_local(o.commitment_date)"/>
+                    <p class="m-0" t-esc="o.convert_utc_to_local(o.sale_id.commitment_date)"/>
                 </div>
             </div>
             <div class="row mt32 mb32">
