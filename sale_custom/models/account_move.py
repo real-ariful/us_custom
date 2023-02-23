@@ -19,7 +19,7 @@ class AccountMove(models.Model):
     event_start = fields.Datetime(compute='_compute_custom_fields')
     event_end = fields.Datetime(compute='_compute_custom_fields')
     order_note = fields.Char(compute='_compute_custom_fields')
-    commitment_date = fields.Char(compute='_compute_custom_fields')
+    commitment_date = fields.Datetime(compute='_compute_custom_fields')
 
     def _compute_custom_fields(self):
         for rec in self:
